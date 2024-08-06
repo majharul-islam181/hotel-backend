@@ -7,7 +7,7 @@ const connectDB = require("./config/db");
 const rateLimit = require("express-rate-limit");
 
 //dot en configuration
-// dotenv.config({path:'./'}) //if .env file is not same location\
+// dotenv.config({path:'./'}) //if .env file is not same location
 dotenv.config();
 
 //db connection
