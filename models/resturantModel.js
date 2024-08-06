@@ -1,0 +1,76 @@
+const mongoose = require("mongoose");
+
+//schema
+const resturantSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, " Resturant title is required"],
+      unique: [true, "Resturant name should be unique"],
+      trim: true,
+    },
+    imageUrl: {
+      type: String,
+    },
+    foods: { type: Array },
+    time: {
+      type: String,
+    },
+    pickup: {
+      type: Boolean,
+      default: true,
+    },
+    delivery: {
+      type: Boolean,
+      default: true,
+    },
+    isOpen: {
+      type: Boolean,
+      default: true,
+    },
+    logoUrl: {
+      type: String,
+    },
+    rating: {
+      type: Number,
+      default: 1,
+      min: 1,
+      max: 5,
+    },
+    ratingCount: { type: String },
+    code: {
+      type: String,
+    },
+    coords: {
+      id: { type: String },
+      latitude: { type: Number },
+      latitudeDelta: { type: Number },
+      longitude: { type: Number },
+      longitudeDelta: { type: Number },
+      address: { type: String },
+      title: { type: String },
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }
+);
+
+// Apply the unique index manually if not already applied
+resturantSchema.index({ title: 1 }, { unique: true });
+
+// Ensure indexes are created
+// resturantSchema.on("index", (error) => {
+//   // if (error) console.error("Index creation error:", error);
+//   if (error) {
+//     return res.status(404).send({
+//       success: false,
+//       message: "Name must be Unique",
+//     });
+//   }
+// });
+
+//export
+module.exports = mongoose.model("Resturant", resturantSchema);
