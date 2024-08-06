@@ -33,13 +33,13 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 //route
-// app.use("/api/v1/test", require("./routes/testRoutes"));
+
 app.use("/api/v1/auth", require("./routes/authRoutes"));
 app.use("/api/v1/room", require("./routes/roomRoutes"));
 app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/resturant", require("./routes/resturantRoutes"));
 app.use("/api/v1/category", require("./routes/categoryRoute"));
-// app.use("/api/v1/food", require("./routes/foodRoutes"));
+
 
 //route
 app.get("/", (req, res) => {
