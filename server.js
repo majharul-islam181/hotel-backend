@@ -39,6 +39,7 @@ app.use("/api/v1/room", require("./routes/roomRoutes"));
 app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/resturant", require("./routes/resturantRoutes"));
 app.use("/api/v1/category", require("./routes/categoryRoute"));
+app.use("/api/v1/reservation", require("./routes/reservationRoutes"));
 
 
 //route
