@@ -76,7 +76,7 @@ const getAllRoomController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "Found room successfully",
-      totalFoods: rooms.length,
+      totalRooms: rooms.length,
       rooms,
     });
   } catch (error) {
@@ -87,6 +87,44 @@ const getAllRoomController = async (req, res) => {
     });
   }
 };
+
+//GET ROOM BY ROOM ID
+const getRoomByIdController = async (req, res) => {
+  try {
+    const roomId = req.params.id;
+    if (!roomId) {
+      return res.status(400).send({
+        success: false,
+        message: "Room ID is required.",
+      });
+    }
+
+    // Find room by ID
+    const room = await roomModel.findById(roomId);
+
+    // Validate room existence
+    if (!room) {
+      return res.status(404).send({
+        success: false,
+        message: "No room found with the given ID.",
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "Room found successfully.",
+      room,
+    });
+  } catch (error) {
+    console.error("Error in Get Room by ID API:", error);
+    res.status(500).send({
+      success: false,
+      message: "Server error. Please try again later.",
+    });
+  }
+};
+
+
 
 //UPDATE ROOMS BY ID
 const updateRoomController = async (req, res) => {
@@ -165,6 +203,7 @@ const updateRoomController = async (req, res) => {
   }
 };
 
+//DELETE ROOM
 const deleteRoomController = async (req, res) => {
   try {
     //get id
@@ -331,4 +370,5 @@ module.exports = {
   deleteRoomController,
   placeOrderController,
   orderStatusController,
+  getRoomByIdController
 };

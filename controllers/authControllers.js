@@ -56,7 +56,7 @@ const loginController = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(500).send({
+      return res.status(400).send({
         success: false,
         message: "Please Provide Email or Password",
       });
@@ -75,7 +75,7 @@ const loginController = async (req, res) => {
     //check user password ! compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(500).send({
+      return res.status(401).send({
         success: false,
         message: "Invalid Credentials",
       });
@@ -87,7 +87,10 @@ const loginController = async (req, res) => {
     user.password = undefined;
     res
       .status(200)
-      .send({ success: true, message: "Succesfully Login", token, user });
+      .send({ success: true,
+        
+        message: "Succesfully Login",
+         token});
   } catch (error) {
     console.log(error);
     res.status(500).send({

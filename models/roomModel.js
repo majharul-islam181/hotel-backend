@@ -24,6 +24,10 @@ const roomSchema = new mongoose.Schema(
     hotelTags:{
         type: String,
     },
+    location: {
+      type: String,
+      
+    },
     category:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
