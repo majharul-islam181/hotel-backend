@@ -1,7 +1,11 @@
 const userModels = require("../models/userModels");
 const bcrypt = require("bcryptjs");
 
+
+//GET USER BY ID
 const userController = async (req, res) => {
+  
+  
   try {
     //find user
     const user = await userModels.findById({ _id: req.body.id });
@@ -174,10 +178,43 @@ const deleteUserController = async( req,res) =>{
       }
 }
 
+//FIND ALL USER
+const allUserController = async (req, res) => {
+  
+  
+  try {
+    //find user
+    const users = await userModels.find();
+    if (!users) {
+      return res.status(500).send({
+        success: false,
+        message: "Users not found",
+      });
+    }
+    //hiding passsword
+    users.password = undefined;
+    //res
+    res.status(200).send({
+      success: true,
+      message: "Users found Sucessfully",
+      users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).send({
+      success: false,
+      message: "Error In get All user api",
+      error,
+    });
+  }
+};
+
+
 module.exports = {
   userController,
   updateUserController,
   updateUserPasswordController,
   resetPasswordController,
-  deleteUserController
+  deleteUserController,
+  allUserController
 };
