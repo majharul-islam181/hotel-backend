@@ -12,13 +12,13 @@ const createReservation = async (req, res) => {
       });
     }
 
-    const { date, guest, queries, roomId } = req.body;
+    const { date, guest, queries, roomId , price } = req.body;
 
     // Validate
-    if (!date || !guest || !roomId) {
+    if (!date || !guest || !roomId || !price) {
       return res.status(400).send({
         success: false,
-        message: "Date, guest and roomId are required.",
+        message: "Date, guest, price and roomId are required.",
       });
     }
 
@@ -29,6 +29,7 @@ const createReservation = async (req, res) => {
       guest,
       queries,
       roomId,
+      price
     });
 
     await newReserve.save();
@@ -117,7 +118,7 @@ const getAllReservation = async (req, res) => {
 };
 
 //Get reservation By User
-const getReservationController = async (req, res) => {
+const getReservationByUserId= async (req, res) => {
   try {
     const userId = req.params.id;
     if (!userId)
@@ -148,9 +149,46 @@ const getReservationController = async (req, res) => {
   }
 };
 
+//Get reservation By User
+const deleteReservationByUserId= async (req, res) => {
+  try {
+    const userId = req.params.id;
+    if (!userId)
+      return res.status(404).send({
+        success: false,
+        message: "No UserID found",
+      });
+
+    const updatedReservation = await reservationModel.findByIdAndDelete(userId);
+    if (!updatedReservation)
+      return res.status(404).send({
+        success: false,
+        message: "No reservation found",
+      });
+
+      res.status(200).send({
+        success: true,
+        message: "Found reservation successfully",
+        totalReservation: updatedReservation.length,
+        updatedReservation,
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in updatedReservation  APi",
+    });
+  }
+};
+
+
+
+
 module.exports = {
   createReservation,
   updateReservation,
   getAllReservation,
-  getReservationController
+  getReservationByUserId,
+  deleteReservationByUserId,
+
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/authMiddleware');
-const { createReservation, updateReservation, getAllReservation, getReservationController } = require('../controllers/reservationController');
+const { createReservation, updateReservation, getAllReservation, getReservationController, getReservationByUserId, deleteReservationByUserId } = require('../controllers/reservationController');
 
 
 const router = express.Router();
@@ -10,12 +10,15 @@ const router = express.Router();
 router.post('/create/:id', authMiddleware, createReservation);
 
 //Get all Reservation
-router.get('/getAll', authMiddleware, getAllReservation);
+router.get('/getAllReservation', authMiddleware, getAllReservation);
 
 //Get all reservation by userId
-router.get('/getReservationByUser/:id', authMiddleware, getReservationController  )
+router.get('/getReservationByUser/:id', authMiddleware, getReservationByUserId  )
 
 //Update Reservation
 router.put('/updateReservation/:id', authMiddleware, updateReservation);
+
+//Delete Reservation by userid
+router.put('/deleteReservationByUserId/:id', authMiddleware, deleteReservationByUserId );
 
 module.exports = router;
