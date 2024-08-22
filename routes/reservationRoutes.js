@@ -4,9 +4,9 @@ const { createReservation, updateReservation, getAllReservation, getReservationC
 
 
 const router = express.Router();
+``
 
-
-//Create Reservation
+//Create Reservation 
 router.post('/create/:id', authMiddleware, createReservation);
 
 //Get all Reservation

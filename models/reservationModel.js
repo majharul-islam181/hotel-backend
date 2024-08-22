@@ -26,6 +26,11 @@ const reservationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    steeperCurrentIndex:{
+      type: Number,
+      // default: 1,
+      required: true,
+    },
   },
   { timestamps: true }
 );

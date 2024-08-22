@@ -12,10 +12,10 @@ const createReservation = async (req, res) => {
       });
     }
 
-    const { date, guest, queries, roomId , price } = req.body;
+    const { date, guest, queries, roomId , price, steeperCurrentIndex } = req.body;
 
     // Validate
-    if (!date || !guest || !roomId || !price) {
+    if (!date || !guest || !roomId || !price || !steeperCurrentIndex) {
       return res.status(400).send({
         success: false,
         message: "Date, guest, price and roomId are required.",
@@ -29,7 +29,8 @@ const createReservation = async (req, res) => {
       guest,
       queries,
       roomId,
-      price
+      price,
+      steeperCurrentIndex
     });
 
     await newReserve.save();
@@ -149,7 +150,7 @@ const getReservationByUserId= async (req, res) => {
   }
 };
 
-//Get reservation By User
+//delete reservation By User
 const deleteReservationByUserId= async (req, res) => {
   try {
     const userId = req.params.id;
