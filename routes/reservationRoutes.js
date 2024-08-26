@@ -4,7 +4,6 @@ const { createReservation, updateReservation, getAllReservation, getReservationC
 
 
 const router = express.Router();
-``
 
 //Create Reservation 
 router.post('/create/:id', authMiddleware, createReservation);
@@ -13,7 +12,7 @@ router.post('/create/:id', authMiddleware, createReservation);
 router.get('/getAllReservation', authMiddleware, getAllReservation);
 
 //Get all reservation by userId
-router.get('/getReservationByUser/:id', authMiddleware, getReservationByUserId  )
+router.get('/getReservationByUser/:id',getReservationByUserId);
 
 //Update Reservation
 router.put('/updateReservation/:id', authMiddleware, updateReservation);

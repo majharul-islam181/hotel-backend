@@ -3,7 +3,7 @@ const categoryModel = require("../models/categoryModel");
 //CREATE CATEGORY
 const createCategoryController = async (req, res) => {
   try {
-    const { title, imageUrl } = req.body;
+    const { title } = req.body;
     //validate
     if (!title) {
       return res.status(404).send({
@@ -13,7 +13,7 @@ const createCategoryController = async (req, res) => {
     }
 
     //create category
-    const newCategory = new categoryModel({ title, imageUrl });
+    const newCategory = new categoryModel({ title });
     await newCategory.save();
     // Fetch all categories
     const allCategories = await categoryModel.find();
@@ -75,7 +75,7 @@ const updateCatController = async (req, res) => {
     //category
     const updateCategory = await categoryModel.findByIdAndUpdate(
       userId,
-      { title, imageUrl },
+      { title },
       { new: true }
     );
     //validate

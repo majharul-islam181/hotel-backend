@@ -1,5 +1,6 @@
 const reservationModel = require("../models/reservationModel");
 const Reservation = require("../models/reservationModel");
+const mongoose = require('mongoose'); 
 
 // Create Reservation
 const createReservation = async (req, res) => {
@@ -12,10 +13,10 @@ const createReservation = async (req, res) => {
       });
     }
 
-    const { date, guest, queries, roomId , price, steeperCurrentIndex } = req.body;
+    const { date, guest, queries, roomId , price, steeperCurrentIndex, roomTitle } = req.body;
 
     // Validate
-    if (!date || !guest || !roomId || !price || !steeperCurrentIndex) {
+    if (!date || !guest) {
       return res.status(400).send({
         success: false,
         message: "Date, guest, price and roomId are required.",
@@ -30,11 +31,12 @@ const createReservation = async (req, res) => {
       queries,
       roomId,
       price,
-      steeperCurrentIndex
+      steeperCurrentIndex,
+      roomTitle
     });
 
     await newReserve.save();
-    res.status(201).send({
+    res.status(200).send({
       success: true,
       message: `Successfully reserved by ${userId}`,
       newReserve,

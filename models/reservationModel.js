@@ -17,6 +17,11 @@ const reservationSchema = new mongoose.Schema(
     queries: {
       type: String,
     },
+    roomTitle:{
+     type: String,
+      required: true,
+
+    },
     roomId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "rooms",

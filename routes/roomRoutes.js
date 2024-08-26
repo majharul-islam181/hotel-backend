@@ -9,7 +9,7 @@ const router = express.Router();
 
 //ROUTES
 //CREATE ROOM
-router.post('/create', authMiddleware, createRoomController)
+router.post('/create',authMiddleware, adminMiddleware, createRoomController)
 
 //GET ALL Room
 router.get('/getAll', getAllRoomController)
