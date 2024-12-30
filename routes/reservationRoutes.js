@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/authMiddleware');
-const { createReservation, updateReservation, getAllReservation, getReservationController, getReservationByUserId, deleteReservationByUserId } = require('../controllers/reservationController');
+const { createReservation, userUpdateReservation, getAllReservation, getReservationController, getReservationByUserId, deleteReservationByUserId } = require('../controllers/reservationController');
 
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router.get('/getAllReservation', authMiddleware, getAllReservation);
 router.get('/getReservationByUser/:id',getReservationByUserId);
 
 //Update Reservation
-router.put('/updateReservation/:id', authMiddleware, updateReservation);
+router.put('/updateReservation/:id', authMiddleware, userUpdateReservation);
 
 //Delete Reservation by userid
 router.put('/deleteReservationByUserId/:id', authMiddleware, deleteReservationByUserId );
