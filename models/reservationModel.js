@@ -17,10 +17,9 @@ const reservationSchema = new mongoose.Schema(
     queries: {
       type: String,
     },
-    roomTitle:{
-     type: String,
+    roomTitle: {
+      type: String,
       required: true,
-
     },
     roomId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -31,10 +30,15 @@ const reservationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    steeperCurrentIndex:{
+    steeperCurrentIndex: {
       type: Number,
       // default: 1,
       required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Accepted", "Rejected"],
+      default: "Pending",
     },
   },
   { timestamps: true }

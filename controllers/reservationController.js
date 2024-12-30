@@ -51,6 +51,9 @@ const createReservation = async (req, res) => {
 };
 
 // Update Reservation
+
+/*
+
 const updateReservation = async (req, res) => {
   try {
     const reserveId = req.params.id;
@@ -93,6 +96,48 @@ const updateReservation = async (req, res) => {
     });
   }
 };
+
+*/
+
+const updateReservation = async (req, res) => {
+  try {
+      const { reservationId, status } = req.body;
+
+      if (!reservationId || !['Accepted', 'Rejected'].includes(status)) {
+          return res.status(400).send({
+              success: false,
+              message: "Reservation ID and valid status ('Accepted', 'Rejected') are required.",
+          });
+      }
+
+      const reservation = await reservationModel.findById(reservationId);
+
+      if (!reservation) {
+          return res.status(404).send({
+              success: false,
+              message: "Reservation not found.",
+          });
+      }
+
+      reservation.status = status;
+      await reservation.save();
+
+      res.status(200).send({
+          success: true,
+          message: `Reservation status updated to ${status}`,
+          reservation,
+      });
+
+      // Send notification logic here (e.g., via email, SMS, or push notification)
+  } catch (error) {
+      console.log(error);
+      res.status(500).send({
+          success: false,
+          message: "Error updating reservation status",
+      });
+  }
+};
+
 
 //Get All Reservation
 const getAllReservation = async (req, res) => {
