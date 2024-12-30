@@ -11,7 +11,7 @@ const router = express.Router();
 router.post("/create", authMiddleware, adminMiddleware, createCategoryController);
 
 //ALL CATEGORY
-router.get('/all-category', authMiddleware,adminMiddleware, getAllCategoryController)
+router.get('/all-category', getAllCategoryController)
 
 //UPDATE CATEGORY
 router.put('/update/:id', authMiddleware,adminMiddleware, updateCatController)
